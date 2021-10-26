@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Information System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="js/external/vue.global.js"></script>
+        <script src="js/external/vuex.global.js"></script>
+        <script src="js/external/vuex-persistedstate.js"></script>
+        <script src="js/external/axios.js"></script>
+    </head>
+    <body>
+        <main id="content">
+            <navigation>
+                
+            </navigation>
+            <h1>How many do you want to buy?</h1>
+                <p>ID: 3740327240</p>
+                <form @submit.prevent="addToCart()">
+                    <fieldset>
+                        <legend>Quantity to buy</legend>
+                        <label for="quantity">How many?</label>
+                        <input v-model="quantity" type="number" id="quantity" required><!-- comment -->
+                        <button type="submit">Add to Cart</button>
+                    </fieldset>
+                </form>
+        </main>
+        <script type="module" src="js/cart.js"></script>
+    </body>
+</html>

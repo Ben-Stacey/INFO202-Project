@@ -1,0 +1,60 @@
+@startuml
+
+' === Style Tweaks ===
+
+skinparam {
+  Style StrictUML
+  RoundCorner 5
+  ParticipantPadding 10
+  Padding 2
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+
+' === Actors / Participants
+
+actor "User" as user
+participant "Main" as main
+participant "MainMenu" as menu <<form>>
+participant "Product Viewer" as ViewProducts <<dialog>>
+participant "ProductJdbiDAO" as J <<ProductDAO>>
+participant "SimpleListModel" as list <<Model>>
+database "H2 Database" as datastore <<data store>>
+
+' === Messages ===
+
+main -> J : construct
+main -> menu : construct(dao)
+
+user -> menu : click "View Products"
+menu -> ViewProducts : construct(dao)
+ViewProducts -> J++ : getProducts()
+
+J -> datastore++ : select product
+
+return query result
+return 
+
+ViewProducts -> list : updateItems(product)
+
+
+user -> ViewProducts : enters searchId
+
+user -> ViewProducts : click "Search"
+
+ViewProducts -> J++ : searchById(productId)
+
+J -> datastore++ : select product where
+
+return query
+return Products
+
+ViewProducts -> list : updateItems(product)
+
+destroy ViewProducts
+
+@enduml

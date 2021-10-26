@@ -1,0 +1,49 @@
+@startuml
+
+' === Style Tweaks ===
+
+skinparam {
+  Style StrictUML
+  RoundCorner 5
+  ParticipantPadding 10
+  Padding 2
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+
+' === Actors / Participants
+
+actor "User" as user
+participant "MainMenu" as menu <<form>>
+participant "ViewProducts" as ViewProducts <<form>>
+participant "ProductCollectionsDAO: ProductCollectionsDAO" as datastore <<data store>>
+participant "SimpleListModel" as list <<Model>>
+
+' === Messages ===
+
+user -> menu : click "View Products"
+menu++
+menu -> ViewProducts : displayForm()
+ViewProducts++
+
+user -> ViewProducts : enter Search By ID
+
+user -> ViewProducts : Choose From Category Filter
+
+user -> ViewProducts : click "Search"
+
+ViewProducts -> datastore++ : getProducts()
+return Products
+
+user -> ViewProducts : Select the product
+
+ViewProducts -> list : updateItems(product)
+
+
+destroy ViewProducts
+
+@enduml

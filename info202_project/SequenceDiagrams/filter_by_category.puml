@@ -1,0 +1,70 @@
+@startuml
+
+' === Style Tweaks ===
+
+skinparam {
+  Style StrictUML
+  RoundCorner 5
+  ParticipantPadding 10
+  Padding 2
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+
+' === Actors / Participants
+
+actor "Customer" as customer
+participant "MainMenuSignedOut" as out <<webpage>>
+participant "SignIn" as sign <<webpage>>
+participant "MainMenuSignedIn" as in <<webpage>>
+participant "BrowseProducts" as products <<webpage>>
+participant "CategoriesFilterAPI"  as capi <<API>>
+participant "ProductsAPI" as papi <<API>>
+participant "ProductModule" as module <<ProductModule>>
+participant "ProductJdbiDAO" as J <<JdbiDAO>>
+participant "SQL Database: SQL Database" as database <<database>>
+
+
+' === Messages ===
+customer -> out : click "Sign in"
+out++
+
+out -> sign : displayForm()
+sign++
+
+customer -> sign : enter Username
+
+customer -> sign : enter Password 
+
+customer -> sign : click "Sign In"
+
+sign -> in : displayForm()
+in++
+
+customer -> in : click "Browse Products"
+
+in -> products : displayForm()
+products++
+
+products -> capi : `//localhost:8080/api/categories/${category}`
+capi -> module : getCategories()
+module -> J : getCategories()
+J -> database++ : SELECT DISTINCT CATEGORY FROM PRODUCT ORDER BY CATEGORY
+return categories
+
+J->products : categories
+
+customer -> products : Clicks Food Category
+
+products -> papi : '//localhost:8080/api/products'
+papi -> module : getProducts()
+module -> J : getProducts()
+J -> database++ : SELECT * FROM PRODUCT ORDER BY PRODUCTID
+return products
+
+J -> products : products
+@enduml

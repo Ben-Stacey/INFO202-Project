@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Information System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="js/external/vue.global.js"></script>
+        <script src="js/external/vuex.global.js"></script>
+        <script src="js/external/vuex-persistedstate.js"></script>
+        <script src="js/external/axios.js"></script>
+    </head>
+    <body>
+        <main id="content">
+            <navigation></navigation>
+            <h1>Create Account</h1>
+            <form @submit.prevent="registerCustomer()">
+                <fieldset>
+                    <legend>Account Details</legend>
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" v-model="customer.username" required><br>
+                    <label for="firstname">First Name:</label><br>
+                    <input type="text" id="firstname" name="firstname" v-model="customer.firstName" required><br>
+                    <label for="lastname">Last Name:</label><br>
+                    <input type="text" id="lastname" name="lastname" v-model="customer.surname" required><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" v-model="customer.emailAddress" required><br>
+                    <label for="Address">Address:</label><br>
+                    <input type="text" id="Address" name="Address" v-model="customer.shippingAddress" required><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" v-model="customer.password" required><br>
+                    <button type="submit" id="create">Create Account</button>
+                </fieldset>
+            </form>
+        </main>
+        <script type="module" src="js/customer.js"></script>
+    </body>
+</html>

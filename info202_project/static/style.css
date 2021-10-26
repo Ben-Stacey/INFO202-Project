@@ -1,0 +1,25 @@
+h1 , h2, h3, p, form, table, ul, main, #content{
+    text-align: center;
+    margin: auto;
+    vertical-align: middle;
+}
+
+h1{
+    background-color: grey;
+    margin-bottom: 40px;
+}
+
+a, ul{
+    padding-left: 10px;
+}
+
+nav {
+    padding-bottom: 40px;
+}
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse : collapse;
+}
+
+
